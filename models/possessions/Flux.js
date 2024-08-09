@@ -6,14 +6,15 @@ import Possession from "./Possession.js";
 export default class Flux extends Possession {
   // Si salaire => +
   // Si train de vie => -
-  constructor(possesseur, libelle, valeur, dateDebut, tauxAmortissement, jour) {
-    super(possesseur, libelle, valeur, dateDebut, tauxAmortissement)
+  constructor(possesseur, libelle, valeurConstante, dateDebut, tauxAmortissement, jour) {
+    super(possesseur, libelle, dateDebut, tauxAmortissement)
     this.valeur = 0;
     this.jour = jour;
+    this.tauxAmortissement = tauxAmortissement
     // this.source = source; // null || Compte
     // this.destination = destination; // Compte
     this.dateDebut = dateDebut;
-    this.valeurConstante = valeur 
+    this.valeurConstante = valeurConstante 
   }
 
 
@@ -43,6 +44,7 @@ export default class Flux extends Possession {
         //ty le ovaina date today ihany    //picker      //le jour pour le calculer
                               //today          today     today
     this.valeur = nombreDeMois(this.dateDebut, date, this.jour) * this.valeurConstante;
-    return this.valeur;
+return this.valeur     
+
   }
 }

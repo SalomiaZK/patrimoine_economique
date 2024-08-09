@@ -9,6 +9,9 @@ export default class Possession {
 
   // pour avoir la valeur apres amortissement
   getValeur(date) {
+    if(date < this.dateDebut){
+      return 0
+    }
     return this.getValeurApresAmortissement(date);
   }
 
