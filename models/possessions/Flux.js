@@ -20,6 +20,9 @@ export default class Flux extends Possession {
 
   getValeur(date) {
 
+    if(this.dateDebut >date){
+      return 0
+    }
     const nombreDeMois = (debut, dateEvaluation, jourJ) => {
         
         let compteur = 0; // a quoi ca sert
