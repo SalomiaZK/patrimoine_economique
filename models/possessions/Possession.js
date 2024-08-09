@@ -1,13 +1,13 @@
 export default class Possession {
-  constructor(possesseur, libelle, valeur, dateDebut, dateFin, tauxAmortissement) {
+  constructor(possesseur, libelle, valeur, dateDebut, tauxAmortissement) {
     this.possesseur = possesseur;
     this.libelle = libelle;
     this.valeur = valeur;
     this.dateDebut = dateDebut;
-    this.dateFin = dateFin;
     this.tauxAmortissement = tauxAmortissement;
   }
 
+  // pour avoir la valeur apres amortissement
   getValeur(date) {
     return this.getValeurApresAmortissement(date);
   }
@@ -17,12 +17,14 @@ export default class Possession {
       return 0;
     }
     const differenceDate = {
-      year: dateActuelle.getFullYear() - this.dateDebut.getFullYear(),
-      month: dateActuelle.getMonth() - this.dateDebut.getMonth(),
-      day: dateActuelle.getDate() - this.dateDebut.getDate(),
+      year: dateActuelle.getFullYear() - this.dateDebut.getFullYear(), // soustrait l année
+      month: dateActuelle.getMonth() - this.dateDebut.getMonth(), // soustrait le mois
+      day: dateActuelle.getDate() - this.dateDebut.getDate(),// soustrait le jours
     };
+
+    // difference => la durée
   
-    var raison = differenceDate.year + differenceDate.month / 12 + differenceDate.day / 365;
+    var raison = differenceDate.year + differenceDate.month / 12 + differenceDate.day / 365; // durée en jours
 
     const result = this.valeur - this.valeur *(raison * this.tauxAmortissement / 100);
     return result;

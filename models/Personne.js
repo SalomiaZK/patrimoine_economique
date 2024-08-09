@@ -3,3 +3,4 @@ export default class Personne {
     this.nom = nom;
   }
 }
+console.log(new Date().getFullYear());

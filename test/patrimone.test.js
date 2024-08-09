@@ -28,7 +28,7 @@ describe("Test about salary evaluation", () => {
             0, 
             3);
 
-        assert.equal(salary.getValeur(new Date("2024-3-3")), 0);
+        assert.equal(salary.getValeur(new Date("2024-1-3")), 0);
 
     });
 
@@ -62,7 +62,7 @@ describe("Test about salary evaluation", () => {
 
 describe("Test about spending evaluation", () => {
     
-    var Ilo = new Personne("Ilo");
+    var Ilo = new Personne("Ilo");  
 
     it("should return a -100_000", () => {
         const spending = new Flux(
