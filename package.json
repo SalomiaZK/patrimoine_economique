@@ -5,12 +5,19 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "React": " cd ui && npm run dev",
+    "express": "cd myapp && nodemon index.js",
+    "start": "concurrently \"npm run React\" \"npm run express\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^5.1.1",
+    "concurrently": "^8.2.2",
     "mocha": "^10.7.0"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.4"
   }
 }
