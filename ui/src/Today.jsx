@@ -23,8 +23,9 @@ export default function Today() {
     const  dofetch = async () =>{
       const donne = await fetch('http://localhost:3000/possessions', {method : "GET"})
       const datas = await donne.json()
-      const pos = datas[1].data.possessions
-      let possession = pos.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut), l.tauxAmortissement))
+      const pos = datas[1].possessions
+      console.log(datas)
+      let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut), l.tauxAmortissement))
       setPos(possession)
       
     
@@ -113,7 +114,7 @@ const head = {
 
     )}
 </table>
-    <Link to="/addPossession"><button>add pos</button></Link>
+    <Link to="/createPossession"><button>add pos</button></Link>
 <br /><p>La valeur de son patrimoine est :</p>
 
 <h2>{patrimoine.getValeur(realDate)}</h2>

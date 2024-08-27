@@ -2,14 +2,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Today from "./Today"
 import HomePage from "./HomePage"
 import Lost from "./Lost"
-import AddPossession from "./AddPossession"
+import CreatePossession from "./CreatePossession"
 const route = createBrowserRouter([
     {
         path: "/",
         element : <HomePage/>, 
         children : [
             {
-                path : "/today", 
+                path : "/possessions", 
                 element : <Today/>
             }
         ]
@@ -20,8 +20,8 @@ const route = createBrowserRouter([
         element : <Lost/>
     },
     {
-        path: "/addPossession", 
-        element : <AddPossession/>
+        path: "/createPossession", 
+        element : <CreatePossession/>
     }
    
 ])

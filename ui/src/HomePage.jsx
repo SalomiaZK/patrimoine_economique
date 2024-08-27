@@ -11,7 +11,7 @@ export default function HomePage() {
             <Container>
                 <Row>
                
-                  <Row><Link to={"/today"}> <h3> today</h3></Link></Row>  
+                  <Row><Link to={"/possessions"}> <h3> today</h3></Link></Row>  
 
                   <Row><Link to={"/"}> <h3> Home</h3></Link></Row>  
                 </Row>

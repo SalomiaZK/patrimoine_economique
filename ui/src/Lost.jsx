@@ -7,7 +7,7 @@ export default function Lost(){
         <p >You could go back to :</p>
         <Link className="text-center" to={"/"}>Home</Link>
                 <p>or</p>
-        <Link to={"/today"}>Converter</Link>
+        <Link to={"/possessions"}>Converter</Link>
         </>
     )
 }
