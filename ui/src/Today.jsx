@@ -14,6 +14,7 @@ export default function Today() {
   const [date , setDate] = useState(new Date())
   const [pos, setPos] = useState([]);
   const [realDate, setRealDate] = useState(new Date())
+  const [isloading, setLoading] = useState(true)
 
 
 
@@ -23,11 +24,11 @@ export default function Today() {
     const  dofetch = async () =>{
       const donne = await fetch('http://localhost:3000/possessions', {method : "GET"})
       const datas = await donne.json()
-      const pos = datas[1].possessions
+
       console.log(datas)
-      let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut), l.tauxAmortissement))
+      let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
       setPos(possession)
-      
+      setLoading(false)
     
     }
      dofetch()
@@ -36,23 +37,12 @@ export default function Today() {
 
    
    let patrimoine = new Patrimoine("Ilo", pos)
-console.log(patrimoine.getValeur(new Date()));
-
-
-
 
 
  
-  
-   
-
-
-
-
-
-
-
-
+   if(isloading == false){
+    console.log(pos);
+   }
 
   
   function capture(ev){
@@ -65,10 +55,11 @@ console.log(patrimoine.getValeur(new Date()));
     
   }
 
-  function removePos(libelle){
- let poo = pos.filter(p => p.libelle !== libelle)  
- setPos(poo)
+
+  function setCloseDate(){
+    
   }
+
 
 
 
@@ -88,6 +79,7 @@ const head = {
 
 
 
+
   return(
       <div>
           <h1>Patrimoine Economique de : Ilo</h1>
@@ -100,6 +92,8 @@ const head = {
       <th>{head.valeurConstante || head.valeur}</th>
       <th>{JSON.stringify(head.dateDebut).slice(1, 11)}</th>
       <th>{head.getValeur(new Date(2024, 9, 30))}</th>
+      <th>Date fin</th>
+
       </tr>
     {pos.map(pos =>
     <tr>
@@ -108,13 +102,17 @@ const head = {
       <td>{pos.valeurConstante || pos.valeur}</td>
       <td>{JSON.stringify(pos.dateDebut).slice(1, 11)}</td>
       <td>{pos.getValeur(new Date(2024, 9, 30))}</td>
-      <button>edit</button>
-      <button onClick={()=>removePos(pos.libelle)}>remove</button>
+      <td>{pos.dateFin}</td>
+
+
+
+      <Link to={"/possession/:"+ pos.libelle +"/update"}><button>edit</button></Link>
+     <button onClick={setCloseDate}>Close</button>
       </tr>
 
     )}
 </table>
-    <Link to="/createPossession"><button>add pos</button></Link>
+    <Link to="/possession/create"><button>add pos</button></Link>
 <br /><p>La valeur de son patrimoine est :</p>
 
 <h2>{patrimoine.getValeur(realDate)}</h2>

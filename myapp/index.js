@@ -1,4 +1,5 @@
-import express, { response } from 'express';
+import express from 'express';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
@@ -11,9 +12,9 @@ const port = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 app.use(bodyParser())
 
-// Middleware pour gérer les CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -21,14 +22,12 @@ app.use((req, res, next) => {
     next();
 });
 
-// Route principale
 app.get("/", (req, res) => {
     res.send("it's working");
 });
 
 
 
-// Route pour le téléchargement de fichier
 app.get('/possessions', (req, res) => {
     const filePath = path.join(__dirname, '../data/data.json');
     res.sendFile(filePath, (err) => {
@@ -51,8 +50,30 @@ app.post('/possessions', async (req, res) => {
         writeFile("../data/data.json", response)
     })
 
-res.json({ "message" : "form submitted"})
+
     });
+
+
+    app.put("/possessions/:libelle/update", async (req, res)=>{
+        console.log(req.body)
+        console.log(req.params.libelle.slice(1))
+
+        const filePath = path.join(__dirname, '../data/data.json');
+        await readFile(filePath).then(data => {
+
+            data.data = data.data.map(d => d.libelle == req.params.libelle.slice(1) ? req.body : d)
+
+            return data.data
+            // console.log(data.data)
+        })
+         .then(response =>{
+             writeFile("../data/data.json", response)
+
+        })
+
+    
+        res.json({message: "updating..."})
+    })
 
 
 // Démarrer le serveur

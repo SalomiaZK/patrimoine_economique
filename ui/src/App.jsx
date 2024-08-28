@@ -3,6 +3,7 @@ import Today from "./Today"
 import HomePage from "./HomePage"
 import Lost from "./Lost"
 import CreatePossession from "./CreatePossession"
+import UpdatePossession from "./UpdatePossession"
 const route = createBrowserRouter([
     {
         path: "/",
@@ -20,8 +21,12 @@ const route = createBrowserRouter([
         element : <Lost/>
     },
     {
-        path: "/createPossession", 
+        path: "/possession/create", 
         element : <CreatePossession/>
+    }, 
+    {
+        path : '/possession/:libelle/update', 
+        element : <UpdatePossession/>
     }
    
 ])
