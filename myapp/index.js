@@ -70,11 +70,33 @@ app.post('/possessions', async (req, res) => {
              writeFile("../data/data.json", response)
 
         })
-
     
         res.json({message: "updating..."})
     })
 
+
+app.put("/possession/:libelle/close", async (req, res)=>{
+    console.log(req.body)
+    console.log(req.params)
+    const filePath = path.join(__dirname, '../data/data.json');
+    await readFile(filePath).then(data => {
+        for(let i = 0; i< data.data.length; i++){
+            let alldata = data.data
+
+            if(alldata[i].libelle == req.params.libelle.slice(1)){
+                alldata[i].dateFin = req.body.dateFin
+            }
+        }
+        console.log(data.data.length)
+
+         return data.data
+    })
+    
+     .then(response => {
+         writeFile("../data/data.json", response)
+     })
+    
+})
 
 // Démarrer le serveur
 app.listen(port, () => {

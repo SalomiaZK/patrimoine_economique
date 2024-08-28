@@ -2,10 +2,10 @@
 
 
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import Patrimoine from "../../models/Patrimoine"
-import Possession from "../../models/possessions/Possession"
-import Flux from "../../models/possessions/Flux"
+import { Link, useParams } from "react-router-dom"
+import Patrimoine from "../../../models/Patrimoine"
+import Possession from "../../../models/possessions/Possession"
+import Flux from "../../../models/possessions/Flux"
 
 
 let id = 1
@@ -56,9 +56,7 @@ export default function Today() {
   }
 
 
-  function setCloseDate(){
-    
-  }
+  
 
 
 
@@ -107,7 +105,7 @@ const head = {
 
 
       <Link to={"/possession/:"+ pos.libelle +"/update"}><button>edit</button></Link>
-     <button onClick={setCloseDate}>Close</button>
+     <Link to={"/possession/:"+ pos.libelle +"/close"}><button>Close</button></Link>
       </tr>
 
     )}
@@ -118,7 +116,7 @@ const head = {
 <h2>{patrimoine.getValeur(realDate)}</h2>
 <div className="change">
 
-<center><input type="date" placeholder="hello" onChange={capture}/> <button onClick={changeValue}>Show</button></center>
+<center><input type="date"  onChange={capture}/> <button onClick={changeValue}>Show</button></center>
 </div>
     </div>
   )

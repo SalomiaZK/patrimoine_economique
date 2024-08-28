@@ -1,9 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Today from "./Today"
-import HomePage from "./HomePage"
-import Lost from "./Lost"
-import CreatePossession from "./CreatePossession"
-import UpdatePossession from "./UpdatePossession"
+import Today from "./Pages/Today"
+import HomePage from "./Pages/HomePage"
+import Lost from "./Pages/Lost"
+import CreatePossession from "./Pages/CreatePossession"
+import ClosePossession from "./Pages/ClosePossession"
+import UpdatePossession from "./Pages/UpdatePossession"
 const route = createBrowserRouter([
     {
         path: "/",
@@ -27,6 +28,11 @@ const route = createBrowserRouter([
     {
         path : '/possession/:libelle/update', 
         element : <UpdatePossession/>
+    }
+    , 
+    {
+        path : '/possession/:libelle/close', 
+        element : <ClosePossession/>
     }
    
 ])

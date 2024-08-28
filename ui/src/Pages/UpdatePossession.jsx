@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap"
 import { useParams } from "react-router-dom"
-import Possession from "../../models/possessions/Possession";
-import Flux from "../../models/possessions/Flux";
+import Possession from "../../../models/possessions/Possession"
+import Flux from "../../../models/possessions/Flux"
 
 export default function UpdatePossession() {
     const { libelle } = useParams()
@@ -39,8 +39,6 @@ export default function UpdatePossession() {
         if (isloading == false) {
             let thePoss = pos.filter(p => p.libelle == libelle.slice(1, libelle.length))[0]
             let updatePossession = new Possession("Ilo", newLibelle, thePoss.valeur || thePoss.valeurConstante, thePoss.dateDebut, newDate, thePoss.tauxAmortissement)
-
-            console.log(updatePossession)
 
             fetch(`http://localhost:3000/possessions/${libelle}/update`, {
                 method: "PUT",

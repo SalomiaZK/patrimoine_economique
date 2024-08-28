@@ -1,5 +1,5 @@
 import { Col } from 'react-bootstrap'
-import Possession from '../../models/possessions/Possession'
+import Possession from '../../../models/possessions/Possession'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 export default function CreatePossession() {
