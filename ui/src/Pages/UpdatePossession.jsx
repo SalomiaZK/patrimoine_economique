@@ -10,7 +10,7 @@ export default function UpdatePossession() {
 
     const [pos, setPos] = useState([])
     const [newLibelle, setNewLieblle] = useState(libelle.slice(1))
-    const [newDate, setNewDate] = useState(new Date())
+    const [newDate, setNewDate] = useState(null)
     const [isloading, setLoading] = useState(true)
 
 

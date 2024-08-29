@@ -33,9 +33,8 @@ export default function Today() {
    }, []);
 
    if(isloading == false){
-    let p = pos.map(p => p.getValeur(new Date()))
-    console.log(p);
-   }
+    
+  
 
    
 
@@ -89,8 +88,8 @@ const head = {
       <td className="text-center w-5 h-5 border-bottom border-black" >{pos.libelle}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.tauxAmortissement}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.valeurConstante || pos.valeur || 0}</td>
-      <td className="text-center w-5 h-5 border-bottom border-black">{JSON.stringify(pos.dateDebut).slice(1, 11)}</td>
-      <td className="text-center w-5 h-5 border-bottom border-black">{pos.getValeur(new Date(2024, 9, 30))}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{new Date(pos.dateDebut).toLocaleDateString()}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{pos.getValeur(new Date())}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.dateFin}</td>
 
 
@@ -107,6 +106,10 @@ const head = {
 
 
     </div>
+  ) }
+
+  return(
+   <h1>Loading...</h1>
   )
 }
 
