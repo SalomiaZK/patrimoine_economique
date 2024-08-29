@@ -5,6 +5,9 @@ import Lost from "./Pages/Lost"
 import CreatePossession from "./Pages/CreatePossession"
 import ClosePossession from "./Pages/ClosePossession"
 import UpdatePossession from "./Pages/UpdatePossession"
+import PatrimoineChart from "./Pages/PatrimoineChart"
+
+
 const route = createBrowserRouter([
     {
         path: "/",
@@ -34,7 +37,11 @@ const route = createBrowserRouter([
         path : '/possession/:libelle/close', 
         element : <ClosePossession/>
     }
-   
+    , 
+    {
+        path : '/patrimoine/range', 
+        element : <PatrimoineChart/>
+    }
 ])
 
 export default function App (){

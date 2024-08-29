@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Patrimoine from "../../../models/Patrimoine"
 import Possession from "../../../models/possessions/Possession"
 import Flux from "../../../models/possessions/Flux"
@@ -41,7 +41,8 @@ export default function Today() {
 
  
    if(isloading == false){
-    console.log(pos);
+    let p = pos.map(p => p.getValeur(new Date()))
+    console.log(p);
    }
 
   
@@ -110,10 +111,11 @@ const head = {
 
     )}
 </table>
+    <Link to={"/patrimoine/range"}>Patrimoine</Link>
     <Link to="/possession/create"><button>add pos</button></Link>
 <br /><p>La valeur de son patrimoine est :</p>
 
-<h2>{patrimoine.getValeur(realDate)}</h2>
+<h2>{patrimoine.getValeur(realDate)  }</h2>
 <div className="change">
 
 <center><input type="date"  onChange={capture}/> <button onClick={changeValue}>Show</button></center>

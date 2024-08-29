@@ -9,12 +9,19 @@ export default class Possession {
   }
 
   getValeur(date) {
+    if( (this.dateFin != null && date >= this.dateFin) || (new Date(this.dateFin).getDate() === date.getDate() && new Date(this.dateFin).getMonth() === date.getMonth() && new Date(this.dateFin).getFullYear() === date.getFullYear()) ){
+      return 0
+    }
     return this.getValeurApresAmortissement(date);
   }
 
   getValeurApresAmortissement(dateActuelle) {
     if (dateActuelle < this.dateDebut) {
       return 0;
+    }
+
+    if(dateActuelle == this.dateFin){
+      return 0
     }
     const differenceDate = {
       year: dateActuelle.getFullYear() - this.dateDebut.getFullYear(),
