@@ -1,3 +1,9 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
+
+
+
 import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
@@ -47,7 +53,6 @@ export default function PatrimoineChart() {
             }
         ]
     }
-    const [data, setData] = useState(defaultData)
 
 
 
@@ -77,7 +82,7 @@ export default function PatrimoineChart() {
     if(isloading == false){
 
     let patrimoine = new Patrimoine("Ilo", pos)
-    let listeDate = getDatesWithDayBetweenDates(realStartDate, realEndDate, theDay)
+    let listeDate = getDatesWithDayBetweenDates(realStartDate, realEndDate, theDay).map(d => d.toDateString())
     let listValue = listeDate.map(l => patrimoine.getValeur(new Date(l)))
 
 
@@ -85,7 +90,7 @@ export default function PatrimoineChart() {
         labels: listeDate ,
         datasets: [
             {
-                label: 'Step',
+                label: 'Valeur du Patrimoine',
                 data: listValue,
                 borderColor: "cyan",
                 backgroundColor: "white"
@@ -107,7 +112,7 @@ export default function PatrimoineChart() {
         const end = new Date(endDate);
       
         if (end < start) {
-          throw new Error('La date de fin doit être après la date de début.');
+          alert('La date de fin doit être après la date de début.');
         }
       
         const dates = [];
@@ -146,33 +151,36 @@ export default function PatrimoineChart() {
 
     return (
         <>
-            <div>
+            <div className='d-flex justify-content-around'>
+                <div>
+                <span>Date debut</span> <br />
                 <input type="date"  onChange={(e)=> setBeginningDate(e.target.value)}/>
-
+                </div>
+                <div>
+                <span>Date fin</span> <br />
                 <input type="date" onChange={(e)=> setEndDate(e.target.value)} />
-                <select onChange={(e) => setTheDay(e.target.value)} >
+                </div>
+
+
+                <div>
+                    <span>day</span><br />
+                <select className='bg-dark' onChange={(e) => setTheDay(e.target.value)} >
                     {day.map(d =>
                         <option>{d}</option>
                     )}
 
                 </select>
-                <button onClick={()=>{
+                <Badge bg="primary" as={Button} onClick={()=>{
                     setRealEndDate(endDate)
                     setStartRealDate(beginningDate)
-                    console.log("List value",listValue)
-                    console.log("List date",listeDate)
-
-                    console.log("dec",patrimoine.getValeur(new Date(2024, 11, 2)))
-                    console.log("nov",patrimoine.getValeur(new Date(2024, 10, 2)))
-                    console.log("oct",patrimoine.getValeur(new Date(2024, 9, 2)))
 
 
-
-
-                }} >Set</button>
+                }} >Set</Badge>
+                </div>
             </div>
-
-            <Line options={option} data={linearData} />
+            <div className='line'>
+           <center><Line className='line' options={option} data={linearData} /></center> 
+           </div>
         </>
     )}
 

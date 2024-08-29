@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap"
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom";
 import Possession from "../../../models/possessions/Possession"
 import Flux from "../../../models/possessions/Flux"
 
@@ -8,7 +9,7 @@ export default function UpdatePossession() {
     const { libelle } = useParams()
 
     const [pos, setPos] = useState([])
-    const [newLibelle, setNewLieblle] = useState('')
+    const [newLibelle, setNewLieblle] = useState(libelle.slice(1))
     const [newDate, setNewDate] = useState(new Date())
     const [isloading, setLoading] = useState(true)
 
@@ -19,7 +20,7 @@ export default function UpdatePossession() {
         const dofetch = async () => {
             const donne = await fetch('http://localhost:3000/possessions', { method: "GET" })
             const datas = await donne.json()
-            let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null,l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut),null,  l.tauxAmortissement))
+            let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement))
             setPos(possession)
             setLoading(false)
 
@@ -31,8 +32,7 @@ export default function UpdatePossession() {
 
 
 
-    function handleSubmit(e) {
-        e.preventDefault()
+    function handleSubmit() {
 
 
 
@@ -47,27 +47,31 @@ export default function UpdatePossession() {
 
             })
 
-            
+
         }
     }
 
 
     return (
-        <center><form action="">
-            <h1>Poosseesion {libelle}</h1>
+        <center><form >
+            <h1>Possession : {libelle.slice(1)}</h1>
             <h2>Update Possession</h2>
             {
-            
-          isloading ? "loading..." : pos.map(p => p.libelle == libelle.slice(1, libelle.length) ?
-                <h3>valeur : {p.getValeur(new Date())}</h3> : console.log(libelle)
-            )}
+
+                isloading ? "loading..." : pos.map(p => p.libelle == libelle.slice(1, libelle.length) ?
+                    <h5>valeur : {p.getValeur(new Date())}</h5> : console.log(libelle)
+                )}
             <Col>
-                <input type="text" placeholder="Libellé" onChange={e => setNewLieblle(e.target.value)} />
+                <span className="darker "> nouveau nom: </span> <br />
+                <input className="mb-2 " type="text" placeholder="Libellé" onChange={e => e.target.value == "" ? setNewLieblle(libelle.slice(1)) :setNewLieblle(e.target.value) } />
             </Col>
             <Col>
-                <input type="date" placeholder="date fin" onChange={e => setNewDate(e.target.value)} />
+                <span className=" darker"> date fin:
+                </span><br />
+                <input className="mb-3" type="date" placeholder="date fin" onChange={e => setNewDate(e.target.value)} />
+                <br />
             </Col>
-            <button onClick={handleSubmit}>update</button>
+            <Link to={"/possessions"} ><button onClick={handleSubmit}>update</button></Link>
         </form>
         </center>
     )

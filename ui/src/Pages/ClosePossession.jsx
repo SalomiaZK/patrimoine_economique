@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-
+import { Link } from "react-router-dom"
 
 export default function ClosePossession(){
 
@@ -18,6 +18,9 @@ export default function ClosePossession(){
 
 
     return (
-        <h1>Nice duh, it was closed as well</h1>
+      <>
+              <h1  className=" m-4">Nice duh, it was closed as well</h1>
+                <center><Link to={"/possessions"}><button>home</button></Link></center>
+      </>
     )
 }

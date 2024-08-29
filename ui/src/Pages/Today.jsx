@@ -1,9 +1,9 @@
 
 
-
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import Patrimoine from "../../../models/Patrimoine"
 import Possession from "../../../models/possessions/Possession"
 import Flux from "../../../models/possessions/Flux"
 
@@ -11,9 +11,7 @@ import Flux from "../../../models/possessions/Flux"
 let id = 1
 
 export default function Today() {
-  const [date , setDate] = useState(new Date())
   const [pos, setPos] = useState([]);
-  const [realDate, setRealDate] = useState(new Date())
   const [isloading, setLoading] = useState(true)
 
 
@@ -34,27 +32,18 @@ export default function Today() {
      dofetch()
    }, []);
 
-
-   
-   let patrimoine = new Patrimoine("Ilo", pos)
-
-
- 
    if(isloading == false){
     let p = pos.map(p => p.getValeur(new Date()))
     console.log(p);
    }
 
+   
+
+
+ 
+ 
   
-  function capture(ev){
-    setDate(new Date(ev.target.value))
-  }
-  
-  function changeValue(){
-    setRealDate(date)
-    setValue(patrimoine.getValeur(realDate))
-    
-  }
+
 
 
   
@@ -84,42 +73,39 @@ const head = {
           <h1>Patrimoine Economique de : Ilo</h1>
           <p className="today">La date actuelle est {JSON.stringify(new Date(2024, 7, 10)).slice(1,11)}</p>
 
-      <table striped bordered hover>
+     <center> <table >
       <tr>
-      <th >{head.libelle}</th>
-      <th>{head.tauxAmortissement}</th>
-      <th>{head.valeurConstante || head.valeur}</th>
-      <th>{JSON.stringify(head.dateDebut).slice(1, 11)}</th>
-      <th>{head.getValeur(new Date(2024, 9, 30))}</th>
-      <th>Date fin</th>
+      <th className="text-center mt-1 bg-black h-10 w-10" >{head.libelle}</th>
+      <th className="text-center mt-1 bg-black h-10 w-10">{head.tauxAmortissement}</th>
+      <th className="text-center mt-1 bg-black h-10 w-10">{head.valeurConstante || head.valeur}</th>
+      <th className="text-center mt-1 bg-black h-10 w-10">{JSON.stringify(head.dateDebut).slice(1, 11)}</th>
+      <th className="text-center mt-1 bg-black h-10 w-10">{head.getValeur(new Date(2024, 9, 30))}</th>
+      <th className="text-center mt-1 bg-black h-10 w-10">Date fin</th>
+      <th className="text-center mt-1 bg-black h-10 w-10">Action</th>
 
       </tr>
     {pos.map(pos =>
     <tr>
-      <td >{pos.libelle}</td>
-      <td>{pos.tauxAmortissement}</td>
-      <td>{pos.valeurConstante || pos.valeur}</td>
-      <td>{JSON.stringify(pos.dateDebut).slice(1, 11)}</td>
-      <td>{pos.getValeur(new Date(2024, 9, 30))}</td>
-      <td>{pos.dateFin}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black" >{pos.libelle}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{pos.tauxAmortissement}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{pos.valeurConstante || pos.valeur || 0}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{JSON.stringify(pos.dateDebut).slice(1, 11)}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{pos.getValeur(new Date(2024, 9, 30))}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{pos.dateFin}</td>
 
 
 
-      <Link to={"/possession/:"+ pos.libelle +"/update"}><button>edit</button></Link>
-     <Link to={"/possession/:"+ pos.libelle +"/close"}><button>Close</button></Link>
+      <Link to={"/possession/:"+ pos.libelle +"/update"}><Badge bg="primary" className='lilButton' as={Button}>edit</Badge></Link>
+     <Link to={"/possession/:"+ pos.libelle +"/close"}><Badge bg="danger" className='lilButton' as={Button}>Close</Badge></Link>
       </tr>
 
     )}
 </table>
-    <Link to={"/patrimoine/range"}>Patrimoine</Link>
-    <Link to="/possession/create"><button>add pos</button></Link>
-<br /><p>La valeur de son patrimoine est :</p>
+</center>
+    <center><Link to="/possession/create"><Badge className='align-self-center bigButton mt-3' as={Button}>Ajouter une Possession</Badge></Link></center>
+<br />
 
-<h2>{patrimoine.getValeur(realDate)  }</h2>
-<div className="change">
 
-<center><input type="date"  onChange={capture}/> <button onClick={changeValue}>Show</button></center>
-</div>
     </div>
   )
 }

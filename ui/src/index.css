@@ -4,34 +4,22 @@
  box-sizing: border-box;
   font-family:  Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
    backdrop-filter: blur(15px);
-   background-color: #222;
-
   color: aliceblue;
 }
 
-
-div{
-  width: 100vw;
-  border-radius: 50% 0% 15%;
-}
-
-table{
-  font-size: 0.7em ;
-  border-top: 1px solid #4790cc;
-  width: 90vw;
-  border-radius: 15px;
-  border-inline: 1px solid #4790cc;
-}
-
-td{
-  width: 1.5em;
-  height: 1.5em;
-  text-align: center;
-  vertical-align: middle;
-  border-bottom: 1px solid black;
-  border-right: 1px solid rgb(30, 32, 32);
+body{
+  background-color: #222;
+  overflow-x: hidden;
 
 }
+
+.cyanBg{
+  background-color: #0c3e66; 
+}
+
+
+
+
 
 button{
   
@@ -43,15 +31,42 @@ border-radius: 3px;
 
 }
 
+.lilButton{
+  height: 5vh;
+width: 6vw;
+}
+
+.bigButton{
+  width: 20vw;
+  height: 7vh;
+  background-color: #4790cc !important; 
+  align-self: center;
+  border-color: cyan;
+
+
+}
+
+.bigButton:hover{
+  scale: 1.2;
+  transition: ease-in-out
+}
+
 h1, h2,p{
   text-align: center;
 }
- .today{
+ 
+table{
+  width: 90vw;
+  border: cyan 1px solid;
+}
+
+.today{
   margin-bottom: 1%;
   font-size: small;
 }
 h1{
-  margin-block: 2%;
+  margin-block: 1%;
+  font-size: 1.5em;
 }
 
 h2{
@@ -71,10 +86,22 @@ input {
 }
 
 th{
-  margin-top: 1%;
-  background-color: rgb(24, 23, 23);
-    border-radius: 15px;
+  font-size: 0.7em;
     color: #63a0d3;
 
 
+}
+
+
+td{
+  border-left: black 1px solid;
+}
+
+.darker{
+  color: rgb(199, 194, 188);
+}
+
+
+.line{
+  width: 90vw;
 }

@@ -1,26 +1,23 @@
 import { Link, Outlet } from "react-router-dom"
-//import 'bootstrap/dist/css/bootstrap.min.css';
-//import 'bootstrap/dist/js/bootstrap.min.js'
-import Container from "react-bootstrap/Container"
-import Col from "react-bootstrap/Col"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js'
+
 import Row from "react-bootstrap/Row"
 
 export default function HomePage() {
     return (
         <>
-            <Container>
-                <Row>
-               
-                  <Row><Link to={"/possessions"}> <h3> today</h3></Link></Row>  
+            <div class="p-3  cyanBg text-white d-flex justify-content-around">
+                <Link className="text-white" to={"/possessions"}> Possessions List</Link>
+                <Link className="text-white" to={"/patrimoine/range"}> Patrimoine Chart</Link>
+                <Link className="text-white" to={"/patrimoine"}> Patrimoine</Link>
 
-                  <Row><Link to={"/"}> <h3> Home</h3></Link></Row>  
-                </Row>
-
-                <Row><Outlet /></Row>
-            </Container>
+            </div>
 
 
-            
+            <Row><Outlet /></Row>
+
+
         </>
     )
 }
