@@ -90,7 +90,7 @@ const head = {
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.valeurConstante || pos.valeur || 0}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{new Date(pos.dateDebut).toLocaleDateString()}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.getValeur(new Date())}</td>
-      <td className="text-center w-5 h-5 border-bottom border-black">{pos.dateFin}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{new Date(pos.dateFin).toLocaleDateString()}</td>
 
 
 

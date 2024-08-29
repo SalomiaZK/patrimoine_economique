@@ -82,7 +82,7 @@ export default function PatrimoineChart() {
     if(isloading == false){
 
     let patrimoine = new Patrimoine("Ilo", pos)
-    let listeDate = getDatesWithDayBetweenDates(realStartDate, realEndDate, theDay).map(d => d.toDateString())
+    let listeDate = getDatesWithDayBetweenDates(realStartDate, realEndDate, theDay).map(d => new Date(d).toLocaleDateString())
     let listValue = listeDate.map(l => patrimoine.getValeur(new Date(l)))
 
 
