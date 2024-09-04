@@ -1,7 +1,8 @@
 import { Col } from 'react-bootstrap'
-import Possession from '../../../models/possessions/Possession'
+import Possession from '../../models/possessions/Possession'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import dotenv from 'dotenv'
 export default function CreatePossession() {
 
   const [name, setname] = useState("")
@@ -12,14 +13,17 @@ export default function CreatePossession() {
 
   const handleSubmit = () => {
     let newPossession = new Possession("Ilo", name, value, date, null, ratio)
+    dotenv.config()
 
 
 
-     fetch("http://localhost:3000/possessions", {
+     fetch(`${process.env.DATABASE_URL}/possessions`, {
       method: "POST", 
       headers : { "Content-type" : "application/json"}, 
       body: JSON.stringify(newPossession)
      }).then(response => response.json())
+
+
   };
   
 

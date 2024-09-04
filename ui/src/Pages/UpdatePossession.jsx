@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Col } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom";
-import Possession from "../../../models/possessions/Possession"
-import Flux from "../../../models/possessions/Flux"
+import Possession from "../../models/possessions/Possession"
+import Flux from "../../models/possessions/Flux"
 
 export default function UpdatePossession() {
     const { libelle } = useParams()

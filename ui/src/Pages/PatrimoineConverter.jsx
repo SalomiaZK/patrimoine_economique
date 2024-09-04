@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Patrimoine from "../../../models/Patrimoine";
-import Possession from "../../../models/possessions/Possession";
-import Flux from "../../../models/possessions/Flux";
+import Patrimoine from "../../models/Patrimoine";
+import Possession from "../../models/possessions/Possession";
+import Flux from "../../models/possessions/Flux";
 
 export default function PatrimoineConverter(){
     const [date , setDate] = useState(new Date())

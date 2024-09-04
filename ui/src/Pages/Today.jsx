@@ -4,8 +4,8 @@ import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import Possession from "../../../models/possessions/Possession"
-import Flux from "../../../models/possessions/Flux"
+import Possession from '../../models/possessions/Possession'
+import Flux from '../../models/possessions/Flux'
 
 
 let id = 1

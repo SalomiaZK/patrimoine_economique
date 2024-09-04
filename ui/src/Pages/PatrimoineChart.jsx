@@ -18,8 +18,8 @@ import {
 
 import { useState, useEffect } from 'react'
 import Patrimoine from '../../../models/Patrimoine'
-import Possession from '../../../models/possessions/Possession'
-import Flux from '../../../models/possessions/Flux'
+import Possession from '../../models/possessions/Possession'
+import Flux from '../../models/possessions/Flux'
 
 
 
