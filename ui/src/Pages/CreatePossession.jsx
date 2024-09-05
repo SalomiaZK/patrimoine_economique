@@ -11,7 +11,10 @@ export default function CreatePossession() {
 
 
   const handleSubmit = (ev) => {
-    let newPossession = new Possession("Ilo", name, value, date, null, ratio)
+    let newPossession = new Possession({"nom": "John Doe"}, name, value, date, null, ratio)
+
+
+    
 
     if (name == "" || value == "") {
       ev.preventDefault()
@@ -37,8 +40,8 @@ export default function CreatePossession() {
 
         <Col><input type="text" placeholder='Valeur' onChange={(e) => setValue(e.target.value)} /></Col>
         <input type="date" placeholder='Date de debut' onChange={(e) => setDate(e.target.value)} /></Col>
-
-      <Link to={"/possessions"}><button onClick={handleSubmit}>Add</button></Link>
+<Link to={"/possessions"}>
+     <button onClick={handleSubmit}>Add</button></Link>
     </form></center>
   )
 }

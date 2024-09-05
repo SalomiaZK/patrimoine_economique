@@ -21,7 +21,7 @@ export default function UpdatePossession() {
         const dofetch = async () => {
             const donne = await fetch(`${import.meta.env.VITE_API_URL}/possessions`, { method: "GET" })
             const datas = await donne.json()
-            let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement))
+            let possession =  datas[1].data.possessions.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement))
             setPos(possession)
             setLoading(false)
 
@@ -34,12 +34,9 @@ export default function UpdatePossession() {
 
 
     function handleSubmit() {
-
-
-
         if (isloading == false) {
             let thePoss = pos.filter(p => p.libelle == libelle.slice(1, libelle.length))[0]
-            let updatePossession = new Possession("Ilo", newLibelle, thePoss.valeur || thePoss.valeurConstante, thePoss.dateDebut, newDate, thePoss.tauxAmortissement)
+            let updatePossession = new Possession({"nom": "John Doe"}, newLibelle, thePoss.valeur || thePoss.valeurConstante, thePoss.dateDebut, newDate, thePoss.tauxAmortissement)
 
             fetch(`${import.meta.env.VITE_API_URL}/possessions/${libelle}/update`, {
                 method: "PUT",
@@ -72,7 +69,7 @@ export default function UpdatePossession() {
                 <input className="mb-3" type="date" placeholder="date fin" onChange={e => setNewDate(e.target.value)} />
                 <br />
             </Col>
-            <Link to={"/possessions"} ><button onClick={handleSubmit}>update</button></Link>
+          <Link to={'/possessions'}> <button onClick={handleSubmit}>update</button> </Link>
         </form>
         </center>
     )

@@ -26,12 +26,12 @@ app.use((req, res, next) => {
 });
 
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://patrimoine-eco-ui.onrender.com');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'https://patrimoine-eco-ui.onrender.com');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type');
+//     next();
+// });
 
 app.get("/", (req, res) => {
     res.send("it's working");
@@ -54,15 +54,26 @@ app.post('/possessions', async (req, res) => {
      const filePath = path.join(__dirname, './data/data.json');
        
     await readFile(filePath).then(data => {
-       data.data.push(newData)
-       return data.data
-       })
-       .then(response => {
-        writeFile("../data/data.json", response)
+    data.data[1].data.possessions.push(newData)
+
+       console.log(data.data[1].data.possessions)
+      return data.data
+      })
+      .then(response => {
+       writeFile("./data/data.json", response)
     })
 
 
     });
+
+
+
+
+
+
+
+
+
 
 
     app.put("/possessions/:libelle/update", async (req, res)=>{
@@ -72,12 +83,11 @@ app.post('/possessions', async (req, res) => {
         const filePath = path.join(__dirname, './data/data.json');
         await readFile(filePath).then(data => {
 
-            data.data = data.data.map(d => d.libelle == req.params.libelle.slice(1) ? req.body : d)
-
+            data.data[1].data.possessions = data.data[1].data.possessions.map(d => d.libelle == req.params.libelle.slice(1) ? req.body : d)
             return data.data
         })
          .then(response =>{
-             writeFile("../data/data.json", response)
+             writeFile("./data/data.json", response)
 
         })
     
@@ -90,20 +100,20 @@ app.put("/possession/:libelle/close", async (req, res)=>{
     console.log(req.params)
     const filePath = path.join(__dirname, './data/data.json');
     await readFile(filePath).then(data => {
-        for(let i = 0; i< data.data.length; i++){
-            let alldata = data.data
+        for(let i = 0; i< data.data[1].data.possessions.length; i++){
+            let alldata = data.data[1].data.possessions
 
             if(alldata[i].libelle == req.params.libelle.slice(1)){
                 alldata[i].dateFin = req.body.dateFin
             }
         }
-        console.log(data.data.length)
+        console.log(data.data)
 
          return data.data
     })
     
      .then(response => {
-         writeFile("../data/data.json", response)
+         writeFile("./data/data.json", response)
      })
     
 })

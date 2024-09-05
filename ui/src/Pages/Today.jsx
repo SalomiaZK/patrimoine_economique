@@ -23,7 +23,7 @@ console.log(import.meta.env.VITE_API_URL);
       const datas = await donne.json()
 
       console.log(datas)
-      let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
+      let possession = datas[1].data.possessions.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
       setPos(possession)
       setLoading(false)
     
@@ -35,7 +35,7 @@ console.log(import.meta.env.VITE_API_URL);
     
   let p = pos.map(p => p.getValeur(new Date()))
 
-   console.log(p);
+   console.log(pos);
 
 
  
@@ -68,7 +68,7 @@ const head = {
 
   return(
       <div>
-          <h1>Patrimoine Economique de : Ilo</h1>
+          <h1>Patrimoine Economique de : {pos[1].possesseur.nom}</h1>
           <p className="today">La date actuelle est {new Date().toLocaleDateString()}</p>
 
      <center> <table >
@@ -85,7 +85,7 @@ const head = {
     {pos.map(pos =>
     <tr>
       <td className="text-center w-5 h-5 border-bottom border-black" >{pos.libelle}</td>
-      <td className="text-center w-5 h-5 border-bottom border-black">{pos.tauxAmortissement}</td>
+      <td className="text-center w-5 h-5 border-bottom border-black">{pos.tauxAmortissement}%</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.valeurConstante || pos.valeur || 0}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{new Date(pos.dateDebut).toLocaleDateString()}</td>
       <td className="text-center w-5 h-5 border-bottom border-black">{pos.getValeur(new Date())}</td>

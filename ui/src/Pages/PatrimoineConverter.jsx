@@ -26,7 +26,7 @@ export default function PatrimoineConverter(){
           const donne = await fetch(`${import.meta.env.VITE_API_URL}/possessions`, {method : "GET"})
           const datas = await donne.json()
     
-          let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
+          let possession =datas[1].data.possessions.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
           setPos(possession)
           setLoading(false)
         
@@ -34,7 +34,7 @@ export default function PatrimoineConverter(){
          dofetch()
        }, []);
 
-       let patrimoine = new Patrimoine("Ilo", pos)
+       let patrimoine = new Patrimoine({"nom": "John Doe"}, pos)
 
        
        if(isloading == false){

@@ -71,7 +71,7 @@ export default function PatrimoineChart() {
           const datas = await donne.json()
     
           console.log(datas)
-          let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
+          let possession = datas[1].data.possessions.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
           setPos(possession)
           setLoading(false)
         
@@ -81,7 +81,7 @@ export default function PatrimoineChart() {
 
     if(isloading == false){
 
-    let patrimoine = new Patrimoine("Ilo", pos)
+    let patrimoine = new Patrimoine({"nom": "John Doe"}, pos)
     let listeDate = getDatesWithDayBetweenDates(realStartDate, realEndDate, theDay).map(d => new Date(d).toLocaleDateString())
     let listValue = listeDate.map(l => patrimoine.getValeur(new Date(l)))
 
