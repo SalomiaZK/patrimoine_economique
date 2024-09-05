@@ -1,5 +1,5 @@
 export default function Welcome(){
     return (
-        <h1>Welcome to Ilo's Patrimoine</h1>
+        <h1>Welcome to John's Patrimoine</h1>
     )
 }
