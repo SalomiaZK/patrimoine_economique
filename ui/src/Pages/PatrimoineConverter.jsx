@@ -4,10 +4,9 @@ import Possession from "../../models/possessions/Possession";
 import Flux from "../../models/possessions/Flux";
 
 export default function PatrimoineConverter(){
-    const [date , setDate] = useState(new Date())
+  const [date , setDate] = useState(new Date())
   const [pos, setPos] = useState([]);
   const [realDate, setRealDate] = useState(new Date())
-
   const [isloading, setLoading] = useState(true)
 
   function capture(ev){
@@ -20,13 +19,13 @@ export default function PatrimoineConverter(){
     
   }
     
+
     useEffect( () => {
 
         const  dofetch = async () =>{
-          const donne = await fetch('http://localhost:3000/possessions', {method : "GET"})
+          const donne = await fetch(`${import.meta.env.VITE_API_URL}/possessions`, {method : "GET"})
           const datas = await donne.json()
     
-          console.log(datas)
           let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante, new Date(l.dateDebut), l.dateFin, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeur, new Date(l.dateDebut),l.dateFin, l.tauxAmortissement ))
           setPos(possession)
           setLoading(false)

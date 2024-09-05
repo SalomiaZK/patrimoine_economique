@@ -3,10 +3,13 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
-import { writeFile , readFile} from '../data/index.js';
+import { writeFile , readFile} from './data/index.js';
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 // Obtenir le répertoire du fichier actuel
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +25,14 @@ app.use((req, res, next) => {
     next();
 });
 
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://patrimoine-eco-ui.onrender.com');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 app.get("/", (req, res) => {
     res.send("it's working");
 });
@@ -29,7 +40,7 @@ app.get("/", (req, res) => {
 
 
 app.get('/possessions', (req, res) => {
-    const filePath = path.join(__dirname, '../data/data.json');
+    const filePath = path.join(__dirname, './data/data.json');
     res.sendFile(filePath, (err) => {
         if (err) {
             console.error('Erreur lors de l\'envoi du fichier:', err);
@@ -40,7 +51,7 @@ app.get('/possessions', (req, res) => {
 
 app.post('/possessions', async (req, res) => {
     let newData = req.body
-     const filePath = path.join(__dirname, '../data/data.json');
+     const filePath = path.join(__dirname, './data/data.json');
        
     await readFile(filePath).then(data => {
        data.data.push(newData)
@@ -58,13 +69,12 @@ app.post('/possessions', async (req, res) => {
         console.log(req.body)
         console.log(req.params.libelle.slice(1))
 
-        const filePath = path.join(__dirname, '../data/data.json');
+        const filePath = path.join(__dirname, './data/data.json');
         await readFile(filePath).then(data => {
 
             data.data = data.data.map(d => d.libelle == req.params.libelle.slice(1) ? req.body : d)
 
             return data.data
-            // console.log(data.data)
         })
          .then(response =>{
              writeFile("../data/data.json", response)
@@ -78,7 +88,7 @@ app.post('/possessions', async (req, res) => {
 app.put("/possession/:libelle/close", async (req, res)=>{
     console.log(req.body)
     console.log(req.params)
-    const filePath = path.join(__dirname, '../data/data.json');
+    const filePath = path.join(__dirname, './data/data.json');
     await readFile(filePath).then(data => {
         for(let i = 0; i< data.data.length; i++){
             let alldata = data.data

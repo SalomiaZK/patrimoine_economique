@@ -17,7 +17,7 @@ import {
 } from 'chart.js'
 
 import { useState, useEffect } from 'react'
-import Patrimoine from '../../../models/Patrimoine'
+import Patrimoine from '../../models/Patrimoine'
 import Possession from '../../models/possessions/Possession'
 import Flux from '../../models/possessions/Flux'
 

@@ -16,9 +16,10 @@ export default function UpdatePossession() {
 
 
 
+
     useEffect(() => {
         const dofetch = async () => {
-            const donne = await fetch('http://localhost:3000/possessions', { method: "GET" })
+            const donne = await fetch(`${import.meta.env.VITE_API_URL}/possessions`, { method: "GET" })
             const datas = await donne.json()
             let possession = datas.map(l => Object.hasOwn(l, "jour") ? new Flux(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement, l.jour) : new Possession(l.possesseur, l.libelle, l.valeurConstante || l.valeur, new Date(l.dateDebut), null, l.tauxAmortissement))
             setPos(possession)
@@ -40,7 +41,7 @@ export default function UpdatePossession() {
             let thePoss = pos.filter(p => p.libelle == libelle.slice(1, libelle.length))[0]
             let updatePossession = new Possession("Ilo", newLibelle, thePoss.valeur || thePoss.valeurConstante, thePoss.dateDebut, newDate, thePoss.tauxAmortissement)
 
-            fetch(`http://localhost:3000/possessions/${libelle}/update`, {
+            fetch(`${import.meta.env.VITE_API_URL}/possessions/${libelle}/update`, {
                 method: "PUT",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(updatePossession)
