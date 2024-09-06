@@ -47,7 +47,7 @@ export default function PatrimoineConverter(){
 
         <>
         <p>La valeur de son patrimoine est :</p>
-        <h2>{patrimoine.getValeur(realDate)  }</h2>
+        <h2>{patrimoine.getValeur(realDate).toFixed(2)  }</h2>
 <div className="change">
 
 <center><input type="date"  onChange={capture}/> <button onClick={changeValue}>Show</button></center>

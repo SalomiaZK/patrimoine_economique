@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "React": " cd ui && npm run dev",
-    "express": "cd myapp && nodemon index.js",
+    "express": "cd back && nodemon index.js",
     "start": "concurrently \"npm run React\" \"npm run express\""
   },
   "author": "",
